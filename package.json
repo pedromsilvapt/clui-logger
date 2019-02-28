@@ -1,0 +1,36 @@
+{
+  "name": "clui-logger",
+  "version": "0.1.0",
+  "description": "Easy to use logger for both small and serious apps that writes both to the terminal and to files",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "repository": "pedromsilvapt/clui-logger",
+  "keywords": [
+    "cli",
+    "ui",
+    "interface",
+    "gui",
+    "terminal",
+    "console",
+    "concurrent",
+    "logger",
+    "progress"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pedro M. Silva <pemiolsi@hotmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "clui-live": "^0.1.0",
+    "data-stopwatch": "^0.1.0",
+    "date-fns": "^1.30.1",
+    "make-dir": "^2.0.0",
+    "mnml-tpl": "^1.0.2",
+    "strip-ansi": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.27"
+  }
+}
