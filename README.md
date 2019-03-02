@@ -8,7 +8,7 @@ npm install --save clui-logger
 
 ## Usage
 ```typescript
-import { Logger, MultiBackend, ConsoleBackend, FileBackend } from './index';
+import { Logger, MultiBackend, ConsoleBackend, FileBackend } from 'clui-logger';
 
 const logger = new Logger( new MultiBackend( [
     new ConsoleBackend(),
@@ -25,10 +25,12 @@ logger.fatal( 'Fatal error with a payload', new Error() );
 logger.service( 'clui-logger' ).info( 'Prefixed info message' );
 
 // Create an auto-updating log message: on the console rewrites the previous line, and on a file just appends the new message
-logger.live().info( 'Progress 0/3' );
-logger.live().info( 'Progress 1/3' );
-logger.live().info( 'Progress 2/3' );
-logger.live().info( 'Progress 3/3' );
+const live = logger.live();
+
+live.info( 'Progress 0/3' );
+live.info( 'Progress 1/3' );
+live.info( 'Progress 2/3' );
+live.info( 'Progress 3/3' );
 
 logger.shared().info( 'clui-logger/shared', 'Shared loggers can have variable prefixes' );
 logger.shared().info( 'clui-logger', 'A different prefix' );
