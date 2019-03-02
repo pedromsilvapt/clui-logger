@@ -17,6 +17,8 @@ export class ConsoleBackend implements Backend {
 
     container : LiveContainerInterface;
 
+    areaClear : boolean = true;
+
     area : LiveAreaInterface = null;
 
     inspector ( data : any ) { return ''; }
@@ -38,6 +40,10 @@ export class ConsoleBackend implements Backend {
 
         if ( this.area === null ) {
             console.log( output );
+        } else if ( this.areaClear ) {
+            this.area.write( output );
+
+            this.areaClear = false;
         } else {
             this.area.append( output );
         }
@@ -60,7 +66,7 @@ export class ConsoleBackend implements Backend {
     beginLive ( area : LiveAreaInterface ) : void {
         this.area = area;
 
-        this.area.clear();
+        this.areaClear = true;
     }
 
     endLive () : void {
