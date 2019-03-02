@@ -74,19 +74,19 @@ export class Logger implements LoggerInterface {
         return this.log( 'fatal', message, data );
     }
 
-    service ( key : string ) : LoggerInterface {
+    service ( key : string ) : Logger {
         return new Logger( this.backend, LoggerUtils.join( this.prefix, key ) );
     }
 
-    shared () : SharedLoggerInterface {
+    shared () : SharedLogger {
         return new SharedLogger( this.backend, this.prefix );
     }
 
-    live () : LiveLoggerInterface {
+    live () : LiveLogger {
         return new LiveLogger( this.backend, this.prefix );
     }
 
-    static () : LoggerInterface {
+    static () : Logger {
         return this;
     }
 }

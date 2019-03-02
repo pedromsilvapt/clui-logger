@@ -41,22 +41,22 @@ export class LiveSharedLogger extends SharedLogger implements LiveSharedLoggerIn
     }
     
     // Override
-    shared () : LiveSharedLoggerInterface {
+    shared () : LiveSharedLogger {
         return this;
     }
 
     // Override
-    service ( key : string ) : LiveLoggerInterface {
+    service ( key : string ) : LiveLogger {
         return new LiveLogger( this.backend, LoggerUtils.join( this.prefix, key ), this.area );
     }
 
     // Override
-    live () : LiveSharedLoggerInterface {
+    live () : LiveSharedLogger {
         return this;
     }
     
     // Override
-    static () : SharedLoggerInterface {
+    static () : SharedLogger {
         return new SharedLogger( this.backend, this.prefix )
     }
 

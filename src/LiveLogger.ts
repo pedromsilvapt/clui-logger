@@ -44,22 +44,23 @@ export class LiveLogger extends Logger implements LiveLoggerInterface {
         return this;
     }
 
-    // TODO Override shared()
-    shared () : SharedLoggerInterface {
+    // Override
+    shared () : LiveSharedLogger {
         return new LiveSharedLogger( this.backend, this.prefix, this.area );
     }
 
-    service ( key : string ) : LoggerInterface {
+    // Override
+    service ( key : string ) : LiveLogger {
         return new LiveLogger( this.backend, LoggerUtils.join( this.prefix, key ), this.area );
     }
 
     // Override
-    live () : LiveLoggerInterface {
+    live () : LiveLogger {
         return this;
     }
 
     // Override
-    static () : LoggerInterface {
+    static () : Logger {
         return new Logger( this.backend, this.prefix );
     }
 

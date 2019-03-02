@@ -64,19 +64,19 @@ export class SharedLogger implements SharedLoggerInterface {
         return this.log( key, 'fatal', message, data );
     }
 
-    shared () : SharedLoggerInterface {
+    shared () : SharedLogger {
         return this;
     }
 
-    service ( key : string ) : LoggerInterface {
+    service ( key : string ) : Logger {
         return new Logger( this.backend, LoggerUtils.join( this.prefix, key ) );
     }
 
-    live () : LiveSharedLoggerInterface {
+    live () : LiveSharedLogger {
         return new LiveSharedLogger( this.backend, this.prefix )
     }
     
-    static () : SharedLoggerInterface {
+    static () : SharedLogger {
         return this;
     }
 }
