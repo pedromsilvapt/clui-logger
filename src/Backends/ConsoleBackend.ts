@@ -1,5 +1,5 @@
 import { Backend } from './Backend';
-import { LiveContainerInterface, LiveAreaInterface, LiveContainer, LiveArea } from 'clui-live';
+import { LiveContainerInterface, LiveAreaInterface, LiveArea } from 'clui-live';
 import chalk from 'chalk';
 
 export class ConsoleBackend implements Backend {
@@ -14,8 +14,6 @@ export class ConsoleBackend implements Backend {
     };
 
     levelsLength : number = Math.max( ...this.levels.map( level => level.length ) );
-
-    container : LiveContainerInterface;
 
     areaClear : boolean = true;
 
@@ -56,11 +54,7 @@ export class ConsoleBackend implements Backend {
     }
     
     createLive () : LiveArea {
-        if ( this.container == null ) {
-            this.container = new LiveContainer().hook();
-        }
-
-        return this.container.createLiveArea();
+        return new LiveArea().hook();
     }
 
     beginLive ( area : LiveAreaInterface ) : void {
