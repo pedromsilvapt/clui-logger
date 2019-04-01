@@ -15,3 +15,5 @@ export { ConsoleBackend } from './Backends/ConsoleBackend';
 export { FileBackend } from './Backends/FileBackend';
 
 export { MultiBackend } from './Backends/MultiBackend';
+
+export { FilterBackend, LogPredicate, LogPredicateParseError } from './Backends/FilterBackend';
