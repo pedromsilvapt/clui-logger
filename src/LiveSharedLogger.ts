@@ -12,6 +12,10 @@ export interface LiveSharedLoggerInterface extends SharedLoggerInterface {
     update ( fn : () => unknown ) : this;
 
     clear () : this;
+    
+    pin () : this;
+
+    unpin () : this;
 
     close () : this;
 }
@@ -58,6 +62,18 @@ export class LiveSharedLogger extends SharedLogger implements LiveSharedLoggerIn
     // Override
     static () : SharedLogger {
         return new SharedLogger( this.backend, this.prefix )
+    }
+
+    pin () : this {
+        this.area.pin();
+
+        return this;
+    }
+
+    unpin () : this {
+        this.area.unpin();
+
+        return this;
     }
 
     begin () : this {

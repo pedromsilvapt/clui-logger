@@ -2,7 +2,6 @@ import { LiveAreaInterface } from 'clui-live';
 import { Logger, LoggerInterface, LoggerUtils } from './internal';
 import { Backend } from './Backends/Backend';
 import { LiveSharedLogger } from './internal';
-import { SharedLoggerInterface } from './internal';
 
 export interface LiveLoggerInterface extends LoggerInterface {
     begin () : this;
@@ -12,6 +11,10 @@ export interface LiveLoggerInterface extends LoggerInterface {
     update ( fn : () => unknown ) : this;
 
     clear () : this;
+
+    pin () : this;
+
+    unpin () : this;
 
     close () : this;
 }
@@ -28,7 +31,7 @@ export class LiveLogger extends Logger implements LiveLoggerInterface {
 
         this.area = area;
 
-        if ( this.backend && this.backend.createLive ) {
+        if ( !this.area && this.backend && this.backend.createLive ) {
             this.area = this.backend.createLive();
         }
     }
@@ -62,6 +65,18 @@ export class LiveLogger extends Logger implements LiveLoggerInterface {
     // Override
     static () : Logger {
         return new Logger( this.backend, this.prefix );
+    }
+
+    pin () : this {
+        this.area.pin();
+
+        return this;
+    }
+
+    unpin () : this {
+        this.area.unpin();
+
+        return this;
     }
 
     begin () : this {
