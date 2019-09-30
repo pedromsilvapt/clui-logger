@@ -106,18 +106,25 @@ export class LogPredicate {
 
         return true;
     }
+
+    equals ( predicate : LogPredicate ) : boolean {
+        return this.level == predicate.level
+            && this.comp == predicate.comp
+            && this.namespace == predicate.namespace
+            && this.negative == predicate.negative;
+    }
 }
 
 export type LogPredicateLike = LogPredicate | string;
 
-export class FilterBackend implements Backend {
-    public readonly base : Backend;
+export class FilterBackend<B extends Backend = Backend> implements Backend {
+    public readonly base : B;
 
     public predicates : LogPredicate[];
 
     public allowEmptyPredicates : boolean = true;
 
-    constructor ( base : Backend, predicates : LogPredicateLike[] | LogPredicateLike = [] ) {
+    constructor ( base : B, predicates : LogPredicateLike[] | LogPredicateLike = [] ) {
         if ( !predicates ) {
             predicates = [];
         }
@@ -130,12 +137,22 @@ export class FilterBackend implements Backend {
         this.predicates = predicates.map( pred => LogPredicate.parse( pred ) );
     }
 
+    addPredicate ( predicateLike : LogPredicateLike, distinct : boolean = false ) {
+        const predicate = LogPredicate.parse( predicateLike );
+
+        if ( distinct && this.predicates.some( pred => pred.equals( predicate ) ) ) {
+            return;
+        }
+
+        this.predicates.push( predicate );
+    }
+
     test ( key : string, level : string, message : string ) : boolean {
         if ( this.allowEmptyPredicates && this.predicates.length == 0 ) {
             return true;
         }
 
-        let allowed = false;
+        let allowed = this.predicates[ 0 ].negative;
 
         for ( let predicate of this.predicates ) {
             if ( predicate.negative && allowed && predicate.test( key, level, message ) ) {

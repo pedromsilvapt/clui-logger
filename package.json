@@ -1,6 +1,6 @@
 {
   "name": "clui-logger",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Easy to use logger for both small and serious apps that writes both to the terminal and to files",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

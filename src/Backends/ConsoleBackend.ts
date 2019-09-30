@@ -1,5 +1,5 @@
 import { Backend } from './Backend';
-import { LiveContainerInterface, LiveAreaInterface, LiveArea } from 'clui-live';
+import { LiveAreaInterface, LiveArea } from 'clui-live';
 import chalk from 'chalk';
 
 export class ConsoleBackend implements Backend {
