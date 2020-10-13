@@ -1,6 +1,13 @@
 import { Backend } from './Backend';
 import { LiveAreaInterface, LiveArea } from 'clui-live';
 import chalk from 'chalk';
+import format from 'date-fns/format';
+
+export const TIMESTAMP_SHORT = 'HH:mm:ss';
+export const TIMESTAMP_SHORT_PAD = 8;
+
+export const TIMESTAMP_LONG = 'HH:mm:ss, do MMM yyyy';
+export const TIMESTAMP_LONG_PAD = 21;
 
 export class ConsoleBackend implements Backend {
     levels = [ 'debug', 'info', 'warn', 'error', 'fatal' ];
@@ -19,6 +26,15 @@ export class ConsoleBackend implements Backend {
 
     area : LiveAreaInterface = null;
 
+    // When != null, prefix each message with the timestamp in the this format
+    timestampFormat : string = null;
+
+    timestampPadLength : number = 0;
+
+    constructor ( timestampFormat : string = null ) {
+        this.timestampFormat = timestampFormat;
+    }
+
     inspector ( data : any ) { return ''; }
 
     format ( key : string, level : string, message : string, data ?: object ) {
@@ -26,11 +42,15 @@ export class ConsoleBackend implements Backend {
 
         const levelString = color( `${ level }` ) + ' '.repeat( this.levelsLength + 1 - level.length );
 
-        if ( key != null ) {
-            return levelString + '[' + chalk.green( `${ key }` ) + '] ' + message + ' ' + ( data ? chalk.grey( this.inspector( data ) ) : '' );
-        } else {
-            return levelString + message + ' ' + ( data ? chalk.grey( this.inspector( data ) ) : '' );
-        }
+        const prefixTimestamp = this.timestampFormat != null
+            ? chalk.grey( format( Date.now(), this.timestampFormat ).padEnd( this.timestampPadLength, ' ' ) + ' ' )
+            : '';
+
+        const prefixService = key != null
+            ? '[' + chalk.green( `${ key }` ) + '] '
+            : '';
+
+        return prefixTimestamp + levelString + prefixService + message + ' ' + ( data ? chalk.grey( this.inspector( data ) ) : '' );
     }
 
     write ( key : string, level : string, message : string, data ?: object ) : void {

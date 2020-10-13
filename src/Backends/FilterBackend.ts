@@ -1,6 +1,5 @@
 import { LiveArea, LiveAreaInterface } from 'clui-live';
 import { Backend } from './Backend';
-import { truncateSync } from 'fs';
 
 export class LogPredicateParseError extends Error { }
 
