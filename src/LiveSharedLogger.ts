@@ -1,8 +1,6 @@
 import { LiveAreaInterface } from 'clui-live';
-import { SharedLogger, SharedLoggerInterface } from './internal';
+import { SharedLogger, SharedLoggerInterface, LiveLogger, LoggerUtils } from './internal';
 import { Backend } from './Backends/Backend';
-import { LiveLoggerInterface, LiveLogger } from './internal';
-import { LoggerUtils } from './internal';
 
 export interface LiveSharedLoggerInterface extends SharedLoggerInterface {
     begin () : this;
