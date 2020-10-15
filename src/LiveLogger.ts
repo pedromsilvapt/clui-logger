@@ -4,6 +4,8 @@ import { Backend } from './Backends/Backend';
 import { LiveSharedLogger } from './internal';
 
 export interface LiveLoggerInterface extends LoggerInterface {
+    service ( key : string ) : LiveLoggerInterface;
+
     begin () : this;
 
     end () : this;

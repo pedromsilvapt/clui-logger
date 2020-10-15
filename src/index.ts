@@ -18,4 +18,4 @@ export { MultiBackend } from './Backends/MultiBackend';
 
 export { FilterBackend, LogPredicate, LogPredicateParseError } from './Backends/FilterBackend';
 
-export { ActivityLogger, Activity, HttpActivity,HttpRequestLogger } from './ActivityLogger';
+export { ActivityLogger, Activity, ActivityLoggerHFP, HttpActivity, HttpRequestLogger } from './ActivityLogger';
