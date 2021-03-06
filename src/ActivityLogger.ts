@@ -149,7 +149,7 @@ export class HttpRequestLogger extends ActivityLogger<HttpActivity> {
     protected logBeginActivity ( action : HttpActivity ) : void {
         const { req, live } = action;
 
-        live.info( `${ chalk.green( req.method.toUpperCase() ) } ${ chalk.grey( req.url ) } ${ chalk.grey( 'running...' ) }` );
+        live.info( `${ chalk.green( req.method.toUpperCase() ) } ${ chalk.grey( decodeURI( req.url ) ) } ${ chalk.grey( 'running...' ) }` );
     }
 
     protected logEndActivity ( activity: HttpActivity ) : void {
@@ -159,7 +159,7 @@ export class HttpRequestLogger extends ActivityLogger<HttpActivity> {
             ? chalk.grey( res.statusCode.toString() )
             : chalk.red( res.statusCode.toString() );
 
-        live.info( `${ chalk.green( req.method.toUpperCase() ) } ${ chalk.cyan( req.url ) } ${ statusCode } ${ stopwatch.readHumanized() }` )
+        live.info( `${ chalk.green( req.method.toUpperCase() ) } ${ chalk.cyan( decodeURI( req.url ) ) } ${ statusCode } ${ stopwatch.readHumanized() }` )
     }
 
     protected findHighFrequencyPattern ( activity : HttpActivity ) : ActivityLoggerHFP {
