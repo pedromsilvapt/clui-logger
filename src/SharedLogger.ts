@@ -27,9 +27,9 @@ export interface SharedLoggerInterface {
 }
 
 export class SharedLogger implements SharedLoggerInterface {
-    protected prefix : string = null;
+    public prefix : string = null;
 
-    backend : Backend;
+    public backend : Backend;
 
     constructor ( backend : Backend = null, prefix : string = null ) {
         this.backend = backend;

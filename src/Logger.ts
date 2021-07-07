@@ -37,9 +37,9 @@ export interface LoggerInterface {
 }
 
 export class Logger implements LoggerInterface {
-    protected prefix : string = null;
+    public prefix : string = null;
 
-    protected backend : Backend;
+    public backend : Backend;
 
     constructor ( backend : Backend = null, prefix : string = null ) {
         this.backend = backend;
