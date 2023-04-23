@@ -90,7 +90,7 @@ export class LiveLogger extends Logger implements LiveLoggerInterface {
 
         return this;
     }
-    
+
     end () : this {
         if ( this.updating > 0 ) {
             this.updating--;
@@ -136,6 +136,3 @@ export class LiveLogger extends Logger implements LiveLoggerInterface {
         return this;
     }
 }
-
-
-

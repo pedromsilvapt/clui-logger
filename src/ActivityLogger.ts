@@ -120,7 +120,7 @@ export abstract class ActivityLogger<A extends Activity, P = RegExp, M = string[
     end ( activity : A ) {
         if ( activity.live ) {
             this.logEndActivity( activity );
-            
+
             if ( activity.hfp != null ) {
                 this.releaseHFPLiveArea( activity.hfp, activity );
             } else {
@@ -130,13 +130,13 @@ export abstract class ActivityLogger<A extends Activity, P = RegExp, M = string[
     }
 }
 
-export interface Request { 
+export interface Request {
     method?: string;
     url?: string;
     activity ?: HttpActivity;
 }
 
-export interface Response { 
+export interface Response {
     statusCode?: number;
 }
 
